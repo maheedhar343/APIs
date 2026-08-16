@@ -1,0 +1,20 @@
+{
+  "city": "Hyderabad",
+  "country": "IN",
+  "current": {
+    "temperature_c": 29.4,
+    "humidity_percent": 68,
+    "condition": "Partly Cloudy"
+  },
+  "forecast": [
+    { "day": "Mon", "high_c": 31, "low_c": 24, "condition": "Sunny" },
+    { "day": "Tue", "high_c": 30, "low_c": 23, "condition": "Rain" },
+    { "day": "Wed", "high_c": 29, "low_c": 23, "condition": "Cloudy" },
+    { "day": "Thu", "high_c": 30, "low_c": 24, "condition": "Sunny" },
+    { "day": "Fri", "high_c": 32, "low_c": 25, "condition": "Sunny" }
+  ],
+  "_links": {
+    "self": "/v1/cities/hyderabad/forecast",
+    "favorite": "/v1/users/42/favorites"
+  }
+}

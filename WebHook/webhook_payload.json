@@ -1,0 +1,12 @@
+{
+  "id": "evt_1PabcXYZ123",
+  "event": "payment_succeeded",
+  "created": 1755417600,
+  "data": {
+    "order_id": 123,
+    "amount": 2500,
+    "currency": "INR",
+    "customer_email": "customer@example.com",
+    "payment_method": "card"
+  }
+}

@@ -1,0 +1,24 @@
+// Protocol Buffers contract for a ride-sharing Location Service
+syntax = "proto3";
+
+package rideshare;
+
+service LocationService {
+  // Server-streaming RPC: client sends one request, server streams back
+  // multiple LocationUpdate messages as the driver moves.
+  rpc GetLiveLocation (TripRequest) returns (stream LocationUpdate);
+
+  // Unary RPC: simple request/response, like a normal function call.
+  rpc GetLastKnownLocation (TripRequest) returns (LocationUpdate);
+}
+
+message TripRequest {
+  string trip_id = 1;
+}
+
+message LocationUpdate {
+  string trip_id = 1;
+  double latitude = 2;
+  double longitude = 3;
+  int64 timestamp_epoch_ms = 4;
+}

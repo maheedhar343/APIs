@@ -1,0 +1,39 @@
+<!-- ============ SOAP REQUEST ============ -->
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:tns="http://bank.example.com/fundtransfer">
+  <soap:Header>
+    <tns:AuthToken>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.example-token</tns:AuthToken>
+  </soap:Header>
+  <soap:Body>
+    <tns:TransferRequest>
+      <tns:fromAccount>ACC10023344</tns:fromAccount>
+      <tns:toAccount>ACC99887766</tns:toAccount>
+      <tns:amount>2500.00</tns:amount>
+      <tns:currency>INR</tns:currency>
+    </tns:TransferRequest>
+  </soap:Body>
+</soap:Envelope>
+
+<!-- ============ SOAP RESPONSE ============ -->
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:tns="http://bank.example.com/fundtransfer">
+  <soap:Body>
+    <tns:TransferResponse>
+      <tns:transactionId>TXN-2026-08-17-000123</tns:transactionId>
+      <tns:status>SUCCESS</tns:status>
+    </tns:TransferResponse>
+  </soap:Body>
+</soap:Envelope>
+
+<!-- ============ SOAP FAULT (Error Example) ============ -->
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <soap:Fault>
+      <faultcode>soap:Client</faultcode>
+      <faultstring>Insufficient funds in source account</faultstring>
+      <detail>
+        <errorCode>ERR_INSUFFICIENT_FUNDS</errorCode>
+      </detail>
+    </soap:Fault>
+  </soap:Body>
+</soap:Envelope>

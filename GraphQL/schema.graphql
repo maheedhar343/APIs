@@ -1,0 +1,48 @@
+# Example GraphQL Schema: a simplified "developer dashboard" domain
+
+type User {
+  login: String!
+  name: String
+  bio: String
+  repositories(first: Int, orderBy: RepoOrder): RepositoryConnection!
+}
+
+type Repository {
+  name: String!
+  description: String
+  stargazerCount: Int!
+  updatedAt: String!
+}
+
+type RepositoryConnection {
+  nodes: [Repository!]!
+  totalCount: Int!
+}
+
+input RepoOrder {
+  field: RepoOrderField!
+  direction: OrderDirection!
+}
+
+enum RepoOrderField {
+  UPDATED_AT
+  STARGAZER_COUNT
+  NAME
+}
+
+enum OrderDirection {
+  ASC
+  DESC
+}
+
+type Query {
+  user(login: String!): User
+}
+
+type Mutation {
+  starRepository(owner: String!, name: String!): Repository!
+}
+
+type Subscription {
+  repositoryStarred(owner: String!, name: String!): Repository!
+}

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sample WSDL: describes a Fund Transfer SOAP service -->
+<definitions name="FundTransferService"
+             targetNamespace="http://bank.example.com/fundtransfer"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="http://bank.example.com/fundtransfer"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <types>
+    <xsd:schema targetNamespace="http://bank.example.com/fundtransfer">
+      <xsd:element name="TransferRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="fromAccount" type="xsd:string"/>
+            <xsd:element name="toAccount" type="xsd:string"/>
+            <xsd:element name="amount" type="xsd:decimal"/>
+            <xsd:element name="currency" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="TransferResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="transactionId" type="xsd:string"/>
+            <xsd:element name="status" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </types>
+
+  <message name="TransferRequestMessage">
+    <part name="parameters" element="tns:TransferRequest"/>
+  </message>
+  <message name="TransferResponseMessage">
+    <part name="parameters" element="tns:TransferResponse"/>
+  </message>
+
+  <portType name="FundTransferPortType">
+    <operation name="TransferFunds">
+      <input message="tns:TransferRequestMessage"/>
+      <output message="tns:TransferResponseMessage"/>
+    </operation>
+  </portType>
+
+  <binding name="FundTransferBinding" type="tns:FundTransferPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="TransferFunds">
+      <soap:operation soapAction="http://bank.example.com/fundtransfer/TransferFunds"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+  </binding>
+
+  <service name="FundTransferService">
+    <port name="FundTransferPort" binding="tns:FundTransferBinding">
+      <soap:address location="https://bank.example.com/soap/fundtransfer"/>
+    </port>
+  </service>
+</definitions>
